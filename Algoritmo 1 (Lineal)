@@ -1,0 +1,22 @@
+public class Lineal {
+
+    public int Lineal(int valor) {
+        long tiempo1 = System.currentTimeMillis();
+        int Suma = 0;
+        for (float a = 1; a < valor+1; a++){
+            Suma += a;
+        }
+
+        long tiempo2 = System.currentTimeMillis();
+
+        long tiempo3 = tiempo2 - tiempo1;
+        System.out.println("Tiempo de ejecucion: " + tiempo3);
+        System.out.println("La suma es: "+ Suma);
+        return Suma;
+    }
+    public static void main(String[] args){
+        Lineal com = new Lineal();
+        System.out.println(com.Lineal(1000000000));
+
+    }
+}
