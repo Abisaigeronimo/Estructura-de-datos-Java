@@ -1,0 +1,16 @@
+public class Constante {
+    public int Constante(int valor) {
+        long tiempo1 = System.currentTimeMillis();
+        int Suma = 0;
+        Suma =(valor * (valor + 1)) / 2;
+        long tiempo2 = System.currentTimeMillis();
+        long tiempo3 = tiempo2 - tiempo1;
+        System.out.println("Tiempo de ejecucion: " + tiempo3);
+        System.out.println("La suma es: "+ Suma);
+        return Suma;
+    }
+    public static void main(String[] args){
+        Constante com = new Constante();
+        System.out.println(com.Constante(1000000000));
+    }
+}
