@@ -1,0 +1,76 @@
+import java.util.Arrays;
+
+public class Reinas {
+    public Reinas() {
+    }
+
+    private static boolean GuardarReina(char[][] a, int b, int c) {
+        int i;
+        for(i = 0; i < b; ++i) {
+            if (a[i][c] == 'R') {
+                return false;
+            }
+        }
+
+        i = b;
+
+        int j;
+        for(j = c; i >= 0 && j >= 0; --j) {
+            if (a[i][j] == 'R') {
+                return false;
+            }
+
+            --i;
+        }
+
+        i = b;
+
+        for(j = c; i >= 0 && j >= a.length; ++j) {
+            if (a[i][j] == 'R') {
+                return false;
+            }
+
+            --i;
+        }
+
+        return true;
+    }
+
+    private static void ImprimirSolucion(char[][] a) {
+        char[][] var1 = a;
+        int var2 = a.length;
+
+        for(int var3 = 0; var3 < var2; ++var3) {
+            char[] chars = var1[var3];
+            System.out.println(Arrays.toString(chars).replaceAll(",", ""));
+        }
+
+        System.out.println();
+    }
+
+    private static void NumeroReina(char[][] a, int b) {
+        if (b == a.length) {
+            ImprimirSolucion(a);
+        } else {
+            for(int i = 0; i < a.length; ++i) {
+                if (GuardarReina(a, b, i)) {
+                    a[b][i] = 'R';
+                    NumeroReina(a, b + 1);
+                    a[b][i] = 8211;
+                }
+            }
+
+        }
+    }
+
+    public static void main(String[] args) {
+        int N = 8;
+        char[][] a = new char[N][N];
+
+        for(int i = 0; i < N; ++i) {
+            Arrays.fill(a[i], '–');
+        }
+
+        NumeroReina(a, 0);
+    }
+}
