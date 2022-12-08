@@ -1,0 +1,85 @@
+public class MoverReinas{
+
+    int tablero [][];
+    int combinaciones;
+
+    public MoverReinas(){
+        tablero =new int[8][8];
+        resetTablero();
+    }
+
+    private void verEstado(){
+        System.out.println("\n"+combinaciones);
+        for (int i=0;i<8;i++){
+            for (int j=0;j<8;j++){
+                if (tablero[i][j]==0)
+                    System.out.println(" . ");
+                else
+                    System.out.println(" Q ");
+            }
+            System.out.println();
+        }
+    }
+
+    private boolean se_Comen(int i, int j) {
+        int r, c;
+        boolean flag = false;
+        for (r = 0; r <= i; r++)
+            if (tablero[r][j] == 1) flag = true;
+        if (!flag) {
+            r = i;
+            c = j;
+            while (r >= 0 && c >= 0) {
+                if (tablero[r][c] == 1) flag = true;
+                r--;
+                c--;
+            }
+        }
+        if (!flag) {
+            r = i;
+            c = j;
+            while (r >= 0 && c <= 7) {
+                if (tablero[r][c] == 1) flag = true;
+                r--;
+                c++;
+            }
+        }
+        return flag;
+    }
+
+    public void colocarQ(int i, int j, int reinas)
+    {
+        if ((i>=0)&&(i<8)&&(j>=0)&&(j<8))
+        {
+                boolean flag=se_Comen(i,j);
+                if (!flag)
+                {
+                    tablero[i][j]=1;
+                    reinas++;
+                    if (reinas==8){
+                        combinaciones++;
+                        verEstado();
+                    }
+                    for (int newj=0;newj<8;newj++)
+                        colocarQ(i+1,newj,reinas);
+                    tablero[i][j]=0;
+                }
+        }
+    }
+
+    private void resetTablero(){
+        for (int i=0;i<8;i++)
+            for (int j=0;j<8;j++)
+                tablero[i][j]=0;
+    }
+    public static void main(String[] args) {
+        MoverReinas ob01=new MoverReinas ();
+        int reinas;
+        for(int j=0;j<8;j++)
+        {
+            reinas=0;
+            ob01.resetTablero();
+            ob01.colocarQ(0,j,reinas);
+        }
+    }
+}
